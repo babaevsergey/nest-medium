@@ -1,6 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  ManyToOne,
+  BeforeUpdate,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserEntity } from '@app/user/user.entity';
 
-@Entity()
+@Entity({ name: 'articles' })
 export class ArticleEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -22,4 +29,18 @@ export class ArticleEntity {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
+
+  @Column('simple-array')
+  tagList: string[];
+
+  @Column({ default: 0 })
+  favoritesCount: number;
+
+  @BeforeUpdate()
+  updateTimestamp() {
+    this.updatedAt = new Date();
+  }
+
+  @ManyToOne(() => UserEntity, (user) => user.articles, { eager: true })
+  author: UserEntity;
 }
