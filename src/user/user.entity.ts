@@ -1,5 +1,7 @@
 import {
   OneToMany,
+  ManyToMany,
+  JoinTable,
   BeforeInsert,
   Column,
   Entity,
@@ -35,4 +37,8 @@ export class UserEntity {
 
   @OneToMany(() => ArticleEntity, (article) => article.author)
   articles: ArticleEntity[];
+
+  @ManyToMany(() => ArticleEntity)
+  @JoinTable()
+  favorites: ArticleEntity[];
 }
