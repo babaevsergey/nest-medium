@@ -19,7 +19,8 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d src/ormconfig.ts",
     "db:create": "npm run typeorm -- migration:generate",
     "db:drop": "npm run typeorm schema:drop",
-    "db:migrate": "npm run typeorm migration:run"
+    "db:migrate": "npm run typeorm migration:run",
+    "db:seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --dataSource src/ormseedconfig.ts migration:run"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
