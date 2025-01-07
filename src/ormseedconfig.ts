@@ -1,8 +1,8 @@
-import ormConfig from '@app/ormconfig';
+import { dataSourceOptions } from '@app/ormconfig';
 
 const ormSeedConfig = {
-  ...ormConfig,
-  migrations: [__dirname + '**/*/src/seeds/*.ts'],
+  ...dataSourceOptions,
+  migrations: ['src/seeds/*.ts'],
 };
 
 export default ormSeedConfig;
