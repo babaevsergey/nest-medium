@@ -102,8 +102,6 @@ export class ArticleService {
       },
     });
 
-    console.log('follows.length', follows.length);
-
     if (follows.length === 0) {
       return { articles: [], articlesCount: 0 };
     }
