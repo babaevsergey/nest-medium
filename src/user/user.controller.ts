@@ -4,7 +4,6 @@ import {
   Get,
   Post,
   Put,
-  Req,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -17,6 +16,7 @@ import { User } from '@app/user/decorators/user.decorator';
 import { UserEntity } from '@app/user/user.entity';
 import { AuthGuard } from '@app/user/guards/auth.guard';
 import { UpdateUserDto } from '@app/user/dto/updeteUser.dto';
+import { BackendValidationPipe } from '@app/shared/pipes/backendValidation';
 
 @Controller()
 export class UserController {
@@ -32,7 +32,7 @@ export class UserController {
   }
 
   @Post('users/login')
-  @UsePipes(new ValidationPipe())
+  @UsePipes(new BackendValidationPipe())
   async login(
     @Body('user') loginUserDto: LoginUserDto,
   ): Promise<UserResponseInterface> {

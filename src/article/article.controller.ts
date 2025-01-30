@@ -20,6 +20,7 @@ import { ArticleResponseInterface } from '@app/article/types/articleResponse.int
 import { DeleteResult } from 'typeorm';
 import { UpdateArticleDto } from '@app/article/dto/updateArticle.dto';
 import { ArticlesResponseInterface } from '@app/article/types/articlesResponse.interface';
+import { BackendValidationPipe } from '@app/shared/pipes/backendValidation';
 
 @Controller('articles')
 export class ArticleController {
@@ -44,7 +45,7 @@ export class ArticleController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @UsePipes(ValidationPipe)
+  @UsePipes(new BackendValidationPipe())
   async create(
     @User() currentUser: UserEntity,
     @Body('article') createArticleDto: CreateArticleDto,
